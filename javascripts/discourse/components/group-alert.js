@@ -25,11 +25,13 @@ export default Component.extend({
       return;
     }
 
-    user.groups.forEach((group) => {
-      if (alertGroups.indexOf(group.name) > -1) {
-        inGroup = true;
-      }
-    });
+    if (user) {
+      user.groups.forEach((group) => {
+        if (alertGroups.indexOf(group.name) > -1) {
+          inGroup = true;
+        }
+      });
+    }
 
     return inGroup;
   },
