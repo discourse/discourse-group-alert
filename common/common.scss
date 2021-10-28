@@ -1,4 +1,9 @@
 .alert.alert-custom {
   background-color: $background-color;
   color: $text-color;
+  margin: 1em 0 0 0;
+}
+
+.below-site-header-outlet.group-alert + #main-outlet {
+  padding-top: 1em;
 }

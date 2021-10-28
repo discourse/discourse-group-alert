@@ -1,8 +1,14 @@
 {{#if shouldDisplay}}
-  <div class="alert alert-custom">
-    {{theme-i18n "banner_content"}}
-    {{#if (theme-setting "can_dismiss")}}
-      {{d-button class="btn-flat close" icon="times" action=(action "dismissBanner")}}
-    {{/if}}
+  <div class="wrap">
+    <div class="alert alert-custom">
+      {{theme-i18n "banner_content"}}
+      {{#if (theme-setting "can_dismiss")}}
+        {{d-button
+          class="btn-flat close"
+          icon="times"
+          action=(action "dismissBanner")
+        }}
+      {{/if}}
+    </div>
   </div>
 {{/if}}
