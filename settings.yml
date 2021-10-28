@@ -1,0 +1,15 @@
+groups:
+  type: list
+  default: "staff|admins"
+
+background_color:
+  type: string
+  default: "var(--quaternary-low)"
+
+text_color:
+  type: string
+  default: "var(--primary)"
+
+can_dismiss:
+  type: bool
+  default: false

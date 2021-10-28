@@ -1,0 +1,43 @@
+import Component from "@ember/component";
+import discourseComputed from "discourse-common/utils/decorators";
+import { action } from "@ember/object";
+
+export default Component.extend({
+  tagName: "",
+  isDismissed: false,
+
+  init() {
+    this._super(...arguments);
+    if (
+      !this.currentUser ||
+      localStorage.getItem(I18n.t(themePrefix("banner_content")))
+    ) {
+      this.set("isDismissed", true);
+    }
+  },
+
+  @discourseComputed("currentUser")
+  shouldDisplay(user) {
+    let alertGroups = settings.groups.split("|");
+    let inGroup;
+
+    if (settings.can_dismiss && this.isDismissed) {
+      return;
+    }
+
+    user.groups.forEach((group) => {
+      if (alertGroups.indexOf(group.name) > -1) {
+        inGroup = true;
+      }
+    });
+
+    return inGroup;
+  },
+
+  @action
+  dismissBanner() {
+    localStorage.setItem(I18n.t(themePrefix("banner_content")), "true");
+    document.querySelector(".alert.alert-custom").classList.add("hidden");
+    this.set("isDismissed", true);
+  },
+});
