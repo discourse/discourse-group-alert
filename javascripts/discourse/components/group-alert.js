@@ -16,10 +16,10 @@ export default Component.extend({
   @discourseComputed("currentUser")
   shouldDisplay(user) {
     let alertGroups = settings.groups.split("|");
-    let inGroup;
+    let inGroup = false;
 
     if (settings.can_dismiss && this.isDismissed) {
-      return;
+      return inGroup;
     }
 
     if (user) {
