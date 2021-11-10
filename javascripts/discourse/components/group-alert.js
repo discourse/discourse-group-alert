@@ -8,10 +8,7 @@ export default Component.extend({
 
   init() {
     this._super(...arguments);
-    if (
-      !this.currentUser ||
-      localStorage.getItem(I18n.t(themePrefix("banner_content")))
-    ) {
+    if (localStorage.getItem(I18n.t(themePrefix("banner_content")))) {
       this.set("isDismissed", true);
     }
   },
