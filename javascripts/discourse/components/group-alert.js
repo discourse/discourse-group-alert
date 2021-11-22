@@ -16,6 +16,7 @@ export default Component.extend({
   @discourseComputed("currentUser")
   shouldDisplay(user) {
     let alertGroups = settings.groups.split("|");
+    let hideGroups = settings.hide_for_groups.split("|");
     let inGroup = false;
 
     if (settings.can_dismiss && this.isDismissed) {
@@ -26,6 +27,12 @@ export default Component.extend({
       user.groups.forEach((group) => {
         if (alertGroups.indexOf(group.name) > -1) {
           inGroup = true;
+        }
+      });
+
+      user.groups.forEach((group) => {
+        if (hideGroups.indexOf(group.name) > -1) {
+          inGroup = false;
         }
       });
     }

@@ -1,6 +1,12 @@
 groups:
   type: list
   default: "staff|admins"
+  description: show for these groups
+
+hide_for_groups:
+  type: list
+  default: ""
+  description: hide for these groups; this will override the groups setting when applicable
 
 background_color:
   type: string
