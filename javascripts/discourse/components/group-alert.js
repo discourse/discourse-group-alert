@@ -1,6 +1,7 @@
 import Component from "@ember/component";
 import discourseComputed from "discourse-common/utils/decorators";
 import { action } from "@ember/object";
+import I18n from "I18n";
 
 export default Component.extend({
   tagName: "",
