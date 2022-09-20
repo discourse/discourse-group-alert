@@ -1,50 +1,51 @@
 import Component from "@ember/component";
 import discourseComputed from "discourse-common/utils/decorators";
-import { action } from "@ember/object";
-import I18n from "I18n";
 
 export default Component.extend({
   tagName: "",
-  isDismissed: false,
 
-  init() {
-    this._super(...arguments);
-    if (localStorage.getItem(I18n.t(themePrefix("banner_content")))) {
-      this.set("isDismissed", true);
-    }
-  },
+  @discourseComputed
+  filteredBanners() {
+    let parsedSetting = JSON.parse(settings.banner_wizard);
 
-  @discourseComputed("currentUser")
-  shouldDisplay(user) {
-    let alertGroups = settings.groups.split("|");
-    let hideGroups = settings.hide_for_groups.split("|");
-    let inGroup = false;
+    let userGroups = this.currentUser
+      ? this.currentUser.groups
+      : [{ name: "anon" }]; // if logged out, set an "anon" group
 
-    if (settings.can_dismiss && this.isDismissed) {
-      return inGroup;
-    }
+    let joinedGroups = userGroups.map(function (group) {
+      return group.name;
+    });
 
-    if (user) {
-      user.groups.forEach((group) => {
-        if (alertGroups.indexOf(group.name) > -1) {
-          inGroup = true;
-        }
-      });
-
-      user.groups.forEach((group) => {
-        if (hideGroups.indexOf(group.name) > -1) {
-          inGroup = false;
-        }
+    // turn comma separated list into array and remove whitespace
+    function splitTrim(array) {
+      return array?.split(",").map(function (string) {
+        return string.trim();
       });
     }
 
-    return inGroup;
-  },
+    // check if there's a single match between two arrays of strings
+    function hasMatch(groups, matchingGroups) {
+      return groups.filter((element) => matchingGroups?.includes(element))
+        .length;
+    }
 
-  @action
-  dismissBanner() {
-    localStorage.setItem(I18n.t(themePrefix("banner_content")), "true");
-    document.querySelector(".alert.alert-custom").classList.add("hidden");
-    this.set("isDismissed", true);
+    let filteredBanners = [];
+
+    // check each banner's group settings against user's group membership
+    parsedSetting.forEach((banner) => {
+      if (banner.contents) {
+        let allowedGroups = splitTrim(banner.show_for_groups);
+        let hiddenGroups = splitTrim(banner.hide_for_groups);
+
+        if (
+          hasMatch(joinedGroups, allowedGroups) &&
+          !hasMatch(joinedGroups, hiddenGroups)
+        ) {
+          filteredBanners.push(banner);
+        }
+      }
+    });
+
+    return filteredBanners;
   },
 });

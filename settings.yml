@@ -1,21 +1,4 @@
-groups:
-  type: list
-  default: "staff|admins"
-  description: show for these groups
-
-hide_for_groups:
-  type: list
-  default: ""
-  description: hide for these groups; this will override the groups setting when applicable
-
-background_color:
-  type: string
-  default: "var(--quaternary-low)"
-
-text_color:
-  type: string
-  default: "var(--primary)"
-
-can_dismiss:
-  type: bool
-  default: false
+banner_wizard:
+  default: >-
+    [{}]
+  json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"show_for_groups":{"type":"string","default":"staff","description":"can be a comma separated list"},"hide_for_groups":{"type":"string","description":"can be a comma separated list"},"background":{"type":"string"},"text_color":{"type":"string"},"contents":{"type":"string","default":"Have a nice day"}},"additionalProperties":false}}'
