@@ -2,7 +2,7 @@
   <div class="wrap">
     <div
       class="alert alert-custom"
-      style="background-color: {{fb.background}}; color: {{fb.text_color}}"
+      style={{html-safe (concat (concat "background-color:" fb.background ";") (concat "color: " fb.text_color ";"))}}
     >
       {{html-safe fb.contents}}
     </div>
