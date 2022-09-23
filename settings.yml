@@ -1,4 +1,4 @@
 banner_wizard:
   default: >-
     [{}]
-  json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"show_for_groups":{"type":"string","default":"staff","description":"can be a comma separated list"},"hide_for_groups":{"type":"string","description":"can be a comma separated list"},"background":{"type":"string"},"text_color":{"type":"string"},"contents":{"type":"string","default":"Have a nice day"}},"additionalProperties":false}}'
+  json_schema: '{"type":"array","format":"list","uniqueItems":true,"items":{"type":"object","properties":{"name": {"type":"string", "description":"Give a unique identifier to the alert."},"show_for_groups":{"type":"string","default":"staff","description":"can be a comma separated list"},"hide_for_groups":{"type":"string","description":"can be a comma separated list"},"background":{"type":"string"},"text_color":{"type":"string"},"contents":{"type":"string","default":"Have a nice day"}},"additionalProperties":false}}'
