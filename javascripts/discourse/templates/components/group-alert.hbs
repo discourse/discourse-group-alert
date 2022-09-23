@@ -1,8 +1,13 @@
 {{#each filteredBanners as |fb|}}
-  <div class="wrap">
+  <div class={{concat-class "wrap" fb.name}}>
     <div
       class="alert alert-custom"
-      style={{html-safe (concat (concat "background-color:" fb.background ";") (concat "color: " fb.text_color ";"))}}
+      style={{html-safe
+        (concat
+          (concat "background-color:" fb.background ";")
+          (concat "color: " fb.text_color ";")
+        )
+      }}
     >
       {{html-safe fb.contents}}
     </div>
