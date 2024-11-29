@@ -1,9 +1,9 @@
 import Component from "@ember/component";
+import { tagName } from "@ember-decorators/component";
 import discourseComputed from "discourse-common/utils/decorators";
 
-export default Component.extend({
-  tagName: "",
-
+@tagName("")
+export default class GroupAlert extends Component {
   @discourseComputed
   filteredBanners() {
     let parsedSetting = JSON.parse(settings.banner_wizard);
@@ -47,5 +47,5 @@ export default Component.extend({
     });
 
     return filteredBanners;
-  },
-});
+  }
+}
