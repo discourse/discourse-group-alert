@@ -1,5 +1,8 @@
 import Component from "@ember/component";
+import { concat } from "@ember/helper";
 import { tagName } from "@ember-decorators/component";
+import concatClass from "discourse/helpers/concat-class";
+import htmlSafe from "discourse/helpers/html-safe";
 import discourseComputed from "discourse/lib/decorators";
 
 @tagName("")
@@ -48,4 +51,22 @@ export default class GroupAlert extends Component {
 
     return filteredBanners;
   }
+
+  <template>
+    {{#each this.filteredBanners as |fb|}}
+      <div class={{concatClass "wrap" fb.name}}>
+        <div
+          class="alert alert-custom"
+          style={{htmlSafe
+            (concat
+              (concat "background-color:" fb.background ";")
+              (concat "color: " fb.text_color ";")
+            )
+          }}
+        >
+          {{htmlSafe fb.contents}}
+        </div>
+      </div>
+    {{/each}}
+  </template>
 }
