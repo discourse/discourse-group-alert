@@ -1,8 +1,8 @@
 import Component from "@ember/component";
 import { concat } from "@ember/helper";
+import { htmlSafe } from "@ember/template";
 import { tagName } from "@ember-decorators/component";
 import concatClass from "discourse/helpers/concat-class";
-import htmlSafe from "discourse/helpers/html-safe";
 import discourseComputed from "discourse/lib/decorators";
 
 @tagName("")
