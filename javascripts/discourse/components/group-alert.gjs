@@ -1,14 +1,15 @@
+/* eslint-disable ember/no-classic-components */
 import Component from "@ember/component";
 import { concat } from "@ember/helper";
+import { computed } from "@ember/object";
 import { htmlSafe } from "@ember/template";
 import { tagName } from "@ember-decorators/component";
 import concatClass from "discourse/helpers/concat-class";
-import discourseComputed from "discourse/lib/decorators";
 
 @tagName("")
 export default class GroupAlert extends Component {
-  @discourseComputed
-  filteredBanners() {
+  @computed
+  get filteredBanners() {
     let parsedSetting = JSON.parse(settings.banner_wizard);
 
     let userGroups = this.currentUser
